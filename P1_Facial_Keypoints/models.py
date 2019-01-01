@@ -73,13 +73,10 @@ class Net(nn.Module):
         # class torch.nn.Linear(in_features, out_features, bias=True)
         self.fc2 = nn.Linear(1000, 1000)  # 1088*3*3 = 9792
         
-        # class torch.nn.Linear(in_features, out_features, bias=True)
-#         self.fc3 = nn.Linear(9792, 9792)  # 1088*3*3 = 9792
-        
         # dropout with p=0.4
         # class torch.nn.Dropout(p=0.5, inplace=False)
         # p (float, optional) – probability of an element to be zero-ed.
-#         self.fc1_drop = nn.Dropout(p=0.4)
+        self.fc1_drop = nn.Dropout(p=0.4)
         
         # finally, create 136 output channels (for the 136 keypoint x,y coord.)
         self.fc3 = nn.Linear(1000, 136)
@@ -106,7 +103,7 @@ class Net(nn.Module):
         
         # two linear layers with dropout in between
         x = F.relu(self.fc1(x))
-#         x = self.fc1_drop(x)
+        x = self.fc1_drop(x)
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         
